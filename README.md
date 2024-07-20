@@ -3,4 +3,5 @@ ESTO ES UN EJERCICIO APLICANDO OAUTH 2.0
     -axios
     -dotenv
     -express
+    -express-session
     -querystring
