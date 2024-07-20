@@ -8,3 +8,7 @@ Las dependencias que se necesitan son las siguientes:
     -express
     -express-session
     -querystring
+
+La URL principal es:
+
+ http://localhost:3001
