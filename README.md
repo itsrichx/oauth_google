@@ -52,8 +52,11 @@ npm install
 Crea un archivo .env en la raíz del proyecto y agrega las siguientes variables de entorno con tus credenciales de Google:
 
 CLIENT_ID=tu_client_id_de_google
+
 CLIENT_SECRET=tu_client_secret_de_google
+
 REDIRECT_URI=http://localhost:3001/auth/google/callback
+
 SESSION_SECRET=tu_session_secret_generado
 
 ### 4. Registrar la aplicación en Google Developers Console
