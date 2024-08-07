@@ -39,7 +39,7 @@ oauth-google-auth/
 
 ### 1. Clonar el repositorio
 
-git clone https://github.com/itsrichx/oauth_google.git
+git clone https://github.com/itsrichx/oauth_google.git 
 cd oauth-google-auth
 
 ### 2. Instalar las dependencias
