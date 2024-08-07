@@ -9,13 +9,21 @@ Este proyecto es una API REST sencilla desarrollada con Node.js y Express que pe
 oauth-google-auth/
 
 ├── node_modules/
+
 ├── views/
+
 │ ├── login.html
+
 │ └── profile.html
+
 ├── .env
+
 ├── index.js
+
 ├── package.json
+
 └── packagelock.json
+
 
 
 
