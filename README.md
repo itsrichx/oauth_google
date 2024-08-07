@@ -7,6 +7,7 @@ Este proyecto es una API REST sencilla desarrollada con Node.js y Express que pe
 ## Estructura del Proyecto
 
 oauth-google-auth/
+
 ├── node_modules/
 ├── views/
 │ ├── login.html
