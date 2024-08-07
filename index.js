@@ -9,7 +9,7 @@ const app = express();
 const port = 3001;
 
 app.use(session({
-  secret: 'your_secret_key',
+  secret:  process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 }));
@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
 });*/
 
 // Ruta para iniciar el proceso de autenticación
-app.get('/login', (req, res) => {
+app.get('/auth/google', (req, res) => {
   const authorizationUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' + 
     querystring.stringify({
       client_id: process.env.CLIENT_ID,
@@ -40,7 +40,7 @@ app.get('/login', (req, res) => {
 });
 
 // Ruta de callback para manejar la respuesta de Google
-app.get('/callback', async (req, res) => {
+app.get('/auth/google/callback', async (req, res) => {
   const { code } = req.query;
 
   try {
@@ -67,7 +67,7 @@ app.get('/callback', async (req, res) => {
 // Ruta para mostrar la página de perfil
 app.get('/profile', (req, res) => {
     if (!req.session.access_token) {
-      return res.redirect('/login');
+      return res.redirect('/');
     }
     res.sendFile(path.join(__dirname, 'views', 'profile.html'));
   });
@@ -87,6 +87,29 @@ app.get('/profile/data', async (req, res) => {
     });
 
     res.json(profileResponse.data);
+  } catch (error) {
+    console.error('Error fetching profile:', error);
+    res.status(500).json({ error: 'Error fetching profile' });
+  }
+});
+
+// Endpoint protegido
+app.get('/protected', async (req, res) => {
+  if (!req.session.access_token) {
+    return res.status(401).json({ error: 'User not authenticated' });
+  }
+
+  try {
+    const profileResponse = await axios.get('https://www.googleapis.com/oauth2/v1/userinfo', {
+      headers: {
+        Authorization: `Bearer ${req.session.access_token}`,
+      },
+    });
+
+    res.json({
+      message: 'Bienvenido',
+      user: profileResponse.data,
+    });
   } catch (error) {
     console.error('Error fetching profile:', error);
     res.status(500).json({ error: 'Error fetching profile' });
